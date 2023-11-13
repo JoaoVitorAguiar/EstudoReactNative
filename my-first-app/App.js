@@ -3,22 +3,23 @@ import { StyleSheet, Text, View, Image, Button, TextInput } from 'react-native';
 import { useState } from 'react';
 
 export default function App() {
+  const [input, setInput] = useState("")
   const [name, setName] = useState("")
+  function getName() {
+    if (name === '') return ''
+    else return 'Bem vindo ' + name
+  }
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder='Digite seu nome'
-        onChangeText={newName => {
-          if (newName.length > 0) {
-            setName("Bem vindo " + newName)
-          }
-          else {
-            setName("")
-          }
+        onChangeText={newInput => {
+          setInput(newInput)
         }}
       />
-      <Text style={styles.texto}>{name}</Text>
+      <Button title='Entrar' onPress={() => { setName(input); if (input === "") alert("Digite seu nome") }} />
+      <Text style={styles.texto}>{getName()}</Text>
     </View>
   );
 }
